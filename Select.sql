@@ -17,17 +17,28 @@ SELECT TOP (1000) [IdPrescription]
   FROM [DB_Pharmacy].[dbo].[TechnologyPreparation];
 
   SELECT TOP (1000) [NameDrug]
-      ,[Count]
       ,[Prise]
       ,[CriticalNorm]
       ,[IdTechnology]
-  FROM [DB_Pharmacy].[dbo].[PharmacyDrug];
+  FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs];
+
+  SELECT TOP (1000) [NameDrug]
+      ,[Count]
+      ,[DateMade]
+      ,[DateUsed]
+  FROM [DB_Pharmacy].[dbo].[PharmacyDrugs];
 
   SELECT TOP (1000) [NameDrug]
       ,[NameCompany]
-      ,[Count]
       ,[Prise]
       ,[CriticalNorm]
+  FROM [DB_Pharmacy].[dbo].[NameFactoryDrugs];
+
+  SELECT TOP (1000) [NameDrug]
+      ,[Count]
+      ,[DateMade]
+      ,[DateUsed]
+	  ,[IdOrder]
   FROM [DB_Pharmacy].[dbo].[FactoryDrugs];
 
   SELECT TOP (1000) [IdOrder]
@@ -44,7 +55,6 @@ SELECT TOP (1000) [IdPrescription]
 
   SELECT TOP (1000) [IdOrder]
       ,[Count]
-      ,[NameDrug]
       ,[Adress]
       ,[DateOrder]
       ,[PriseOrder]

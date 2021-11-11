@@ -14,16 +14,31 @@ CREATE TABLE [dbo].[PrescriptionDoctor](
 ) 
 GO
 
-CREATE TABLE [dbo].[FactoryDrugs](
+CREATE TABLE [dbo].[NameFactoryDrugs](
 	[NameDrug] [nvarchar](50) NOT NULL PRIMARY KEY,
 	[NameCompany] [nvarchar](50) NOT NULL,
-	[Count] [int] NOT NULL,
 	[Prise][money] NOT NULL,
 	[CriticalNorm][int] NOT NULL
 ) 
 GO
 
+CREATE TABLE [dbo].[Order](
+	[IdOrder] [int] IDENTITY(1,1)PRIMARY KEY,
+	[Count] [int],
+	[Adress][nvarchar](50) NOT NULL,
+	[DateOrder][date] NOT NULL,
+	[PriseOrder][money] NOT NULL
+) 
+GO
 
+CREATE TABLE [dbo].[FactoryDrugs](
+	[NameDrug] [nvarchar](50) NOT NULL FOREIGN KEY REFERENCES NameFactoryDrugs(NameDrug),
+	[Count] [int] NOT NULL,
+	[DateMade][Date] NOT NULL,
+	[DateUsed][Date] NOT NULL,
+	[IdOrder] [int] UNIQUE FOREIGN KEY REFERENCES [Order](IdOrder)
+) 
+GO
 
 CREATE TABLE [dbo].[TechnologyPreparation](
 	[IdTechnology] [int] IDENTITY(1,1) PRIMARY KEY,
@@ -33,25 +48,31 @@ CREATE TABLE [dbo].[TechnologyPreparation](
 ) 
 GO
 
-CREATE TABLE [dbo].[PharmacyDrug](
+CREATE TABLE [dbo].[NamePharmacyDrugs](
 	[NameDrug] [nvarchar](50) NOT NULL PRIMARY KEY,
-	[Count] [int] NOT NULL,
 	[Prise][money] NOT NULL,
 	[CriticalNorm][int] NOT NULL,
 	[IdTechnology] [int] NOT NULL UNIQUE FOREIGN KEY REFERENCES TechnologyPreparation(IdTechnology)
 ) 
 GO
 
+CREATE TABLE [dbo].[PharmacyDrugs](
+	[NameDrug] [nvarchar](50) NOT NULL FOREIGN KEY REFERENCES NamePharmacyDrugs(NameDrug),
+	[Count] [int] NOT NULL,
+	[DateMade][Date] NOT NULL,
+	[DateUsed][Date] NOT NULL
+) 
+GO
+
 CREATE TABLE [dbo].[DirectoryOrder](
 	[IdOrder] [int] IDENTITY(1,1) PRIMARY KEY,
 	[TypeDrug][nvarchar](10) NOT NULL,
-	[NamePharmacyDrug] [nvarchar](50) NULL FOREIGN KEY REFERENCES PharmacyDrug(NameDrug),
-	[NameFactoryDrug] [nvarchar](50) NULL FOREIGN KEY REFERENCES FactoryDrugs(NameDrug),
+	[NamePharmacyDrug] [nvarchar](50) NULL FOREIGN KEY REFERENCES NamePharmacyDrugs(NameDrug),
+	[NameFactoryDrug] [nvarchar](50) NULL FOREIGN KEY REFERENCES NameFactoryDrugs(NameDrug),
 	[DateOrder] [Date] DEFAULT(getdate()),
 	[Bought][bit] NOT NULL
 ) 
 GO
-
 
 CREATE TABLE [dbo].[ListDrugs](
 	[IdPrescription] [int] NOT NULL FOREIGN KEY REFERENCES PrescriptionDoctor(IdPrescription),
@@ -59,15 +80,7 @@ CREATE TABLE [dbo].[ListDrugs](
 ) 
 GO
 
-CREATE TABLE [dbo].[Order](
-	[IdOrder] [int] IDENTITY(1,1)PRIMARY KEY,
-	[Count] [int],
-	[NameDrug] [nvarchar](50) NOT NULL FOREIGN KEY REFERENCES FactoryDrugs(NameDrug),
-	[Adress][nvarchar](50) NOT NULL,
-	[DateOrder][date] NOT NULL,
-	[PriseOrder][money] NOT NULL
-) 
-GO
+
 
 
 

@@ -4,7 +4,7 @@ DELETE FROM TechnologyPreparation Where IdTechnology = '1';
 
 DELETE FROM [Order] Where IdOrder = '1';
 
-UPDATE PharmacyDrug
+UPDATE NamePharmacyDrugs
 SET Prise='130.00'
 WHERE NameDrug='Коваміл';
 

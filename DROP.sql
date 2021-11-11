@@ -6,10 +6,14 @@ DROP TABLE [dbo].[PrescriptionDoctor];
 
 DROP TABLE [dbo].[DirectoryOrder];
 
-DROP TABLE [dbo].[PharmacyDrug];
+DROP TABLE [dbo].[PharmacyDrugs];
+
+DROP TABLE [dbo].[NamePharmacyDrugs];
 
 DROP TABLE [dbo].[TechnologyPreparation];
 
+DROP TABLE[dbo].[FactoryDrugs];
+
 DROP TABLE [dbo].[Order];
 
-DROP TABLE[dbo].[FactoryDrugs];
+DROP TABLE[dbo].[NameFactoryDrugs];
