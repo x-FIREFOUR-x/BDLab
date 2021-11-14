@@ -34,8 +34,8 @@ GO
 CREATE TABLE [dbo].[FactoryDrugs](
 	[NameDrug] [nvarchar](50) NOT NULL FOREIGN KEY REFERENCES NameFactoryDrugs(NameDrug),
 	[Count] [int] NOT NULL,
-	[DateMade][Date] NOT NULL,
-	[DateUsed][Date] NOT NULL,
+	[DateMade][date] NOT NULL,
+	[DateUsed][date] NOT NULL,
 	[IdOrder] [int] UNIQUE FOREIGN KEY REFERENCES [Order](IdOrder)
 ) 
 GO
