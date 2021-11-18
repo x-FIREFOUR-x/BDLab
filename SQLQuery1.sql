@@ -80,9 +80,16 @@ CREATE TABLE [dbo].[ListDrugs](
 ) 
 GO
 
+ALTER TABLE ListDrugs
+    ADD  PRIMARY KEY (IdPrescription,IdOrder)
+GO
 
+ALTER TABLE PharmacyDrugs
+    ADD  PRIMARY KEY (NameDrug,DateMade)
+GO
 
-
-
+ALTER TABLE FactoryDrugs
+    ADD  PRIMARY KEY (NameDrug,DateMade)
+GO
 
 
