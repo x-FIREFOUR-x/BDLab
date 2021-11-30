@@ -5,8 +5,6 @@ CREATE TABLE [dbo].[PrescriptionDoctor](
 	[IdPrescription] [int] IDENTITY(1,1) PRIMARY KEY,
 	[NameDoctor] [nvarchar](50) NOT NULL,
 	[SurnameDoctor] [nvarchar](50) NOT NULL,
-	[SealDoctor] [image] NOT NULL,
-	[SignatureDoctor] [image] NOT NULL,
 	[NamePatient] [nvarchar](50) NOT NULL,
 	[SurnamePatient] [nvarchar](50) NOT NULL,
 	[DateBirth] [date] NOT NULL,

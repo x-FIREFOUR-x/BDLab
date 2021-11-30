@@ -2,8 +2,6 @@ USE DB_Pharmacy
 SELECT TOP (1000) [IdPrescription]
       ,[NameDoctor]
       ,[SurnameDoctor]
-      ,[SealDoctor]
-      ,[SignatureDoctor]
       ,[NamePatient]
       ,[SurnamePatient]
       ,[DateBirth]

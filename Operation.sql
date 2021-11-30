@@ -9,14 +9,14 @@ SET Prise='130.00'
 WHERE NameDrug='Коваміл';
 
 UPDATE PrescriptionDoctor
-SET SignatureDoctor='1111', SealDoctor = '1111'
+SET NameDoctor='Василь'
 WHERE SurnameDoctor='Жук';
 
 UPDATE DirectoryOrder
 SET Bought = '0';
 
 ALTER TABLE PrescriptionDoctor
-ALTER COLUMN SignatureDoctor [image] NULL;
+ALTER COLUMN SurnameDoctor [nvarchar](50) NULL;
 
 ALTER TABLE [Order]
 ALTER COLUMN [Count] [bigint];
@@ -28,4 +28,4 @@ ALTER TABLE PrescriptionDoctor
 Drop COLUMN FatherName;
 
 ALTER TABLE PrescriptionDoctor
-Drop COLUMN SealDoctor;
+Drop COLUMN SurnameDoctor;
