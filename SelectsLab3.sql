@@ -152,14 +152,18 @@ WHERE [Count] > 10 AND [ExpirationDate] Like '%day%';
 Select *
 FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs]
 LEFT JOIN [DB_Pharmacy].[dbo].[PharmacyDrugs] ON
-	[NamePharmacyDrugs].[NameDrug] = PharmacyDrugs.[NameDrug]; 
+	[NamePharmacyDrugs].[NameDrug] = PharmacyDrugs.[NameDrug]
+Left JOIN [DB_Pharmacy].[dbo].[TechnologyPreparation] ON
+	[NamePharmacyDrugs].[IdTechnology] = [TechnologyPreparation].[IdTechnology]; 
 
 
 
 Select *
 FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs]
 RIGHT JOIN [DB_Pharmacy].[dbo].[PharmacyDrugs] ON
-	[NamePharmacyDrugs].[NameDrug] = PharmacyDrugs.[NameDrug];
+	[NamePharmacyDrugs].[NameDrug] = PharmacyDrugs.[NameDrug]
+Right JOIN [DB_Pharmacy].[dbo].[TechnologyPreparation] ON
+[NamePharmacyDrugs].[IdTechnology] = [TechnologyPreparation].[IdTechnology]; 
 
 
 
@@ -172,3 +176,18 @@ SELECT [Count], [DateMade],[DateUsed], [NamePharmacyDrugs].[NameDrug]
 FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs]
 FULL JOIN [DB_Pharmacy].[dbo].[PharmacyDrugs] ON
 	[NamePharmacyDrugs].[NameDrug] = PharmacyDrugs.[NameDrug];
+
+SELECT [NameDrug], [prise], [CriticalNorm]
+FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs]
+UNION
+SELECT [NameDrug], [prise], [CriticalNorm]
+FROM [DB_Pharmacy].[dbo].[NameFactoryDrugs]
+
+SELECT [NameDrug], [prise], [CriticalNorm]
+FROM [DB_Pharmacy].[dbo].[NamePharmacyDrugs]
+UNION
+SELECT [NameDrug], [prise], [CriticalNorm]
+FROM [DB_Pharmacy].[dbo].[NameFactoryDrugs]
+UNION
+SELECT [NameDrug], [Count], [IdOrder]
+FROM [DB_Pharmacy].[dbo].[FactoryDrugs]
