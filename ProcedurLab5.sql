@@ -1,6 +1,14 @@
 USE DB_Pharmacy
 
-	--g a
+
+
+
+
+	--a
+
+
+
+
 
 	--b
 CREATE PROC GoodsPrice
@@ -140,9 +148,24 @@ SELECT 'Count' = @Return_count;
 
 
 
+		--g
+CREATE PROC Update_PharmacyDrugs
+	@Name nvarchar(50),
+	@NewCount int
+
+AS
+BEGIN
+	UPDATE PharmacyDrugs set [Count] = @NewCount WHERE NameDrug = @Name
+END
+
+EXEC Update_PharmacyDrugs 'Коваміл', 20
 
 
-	--h
+
+
+
+
+		--h
 CREATE PROC AmountKindDrugsInPrescription
 AS
 BEGIN
