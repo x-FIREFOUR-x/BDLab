@@ -95,10 +95,13 @@ INNER JOIN (SELECT [NameDrug], [prise]
 			FROM [NameFactoryDrugs])  AS Drugs
 ON DirectOrder.Name_Drug = Drugs.NameDrug
 GROUP BY [PrescriptionDoctor].[IdPrescription], [PrescriptionDoctor].[NamePatient], [PrescriptionDoctor].[SurnamePatient],  DirectOrder.DateOrder
-HAVING Sum(Drugs.Prise) > 60
+HAVING Sum(Drugs.Prise) > 100
 
 
-
+	-- h
+Select 'True' As IsDrugsExpensive
+FROM NamePharmacyDrugs
+having Max(Prise) > 100
 
 	--i
 SELECT NamePatient, SurnamePatient, Name_Drug, Prise, DateOrder
