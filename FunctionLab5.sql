@@ -9,18 +9,19 @@ RETURNS int
 AS
 BEGIN
 	DECLARE @res INT
-	SET @RES = (SELECT SUM(Table1.[COUNT])
+	SELECT @RES =  SUM(Table1.[COUNT])
 	FROM (SELECT NameDrug, [Count] 
 		  FROM FactoryDrugs
 		  UNION
 		  SELECT NameDrug, [Count] 
 		  FROM PharmacyDrugs
 		  ) AS Table1
-	WHERE NameDrug = @Name)
-	RETURN @RES
+	WHERE NameDrug = @Name;
+
+	RETURN @RES;
 END
 
-DROP FUNCTION Amount_Drug
+DROP FUNCTION Func_Amount_Drug
 
 SELECT dbo.Func_Amount_Drug('Îôòàì³ë50')
 
@@ -28,20 +29,46 @@ SELECT dbo.Func_Amount_Drug('Îôòàì³ë50')
 
 
 
-		--B / C
-CREATE FUNCTION Func_Table_Drugs
-(
-)
+		--B 
+CREATE FUNCTION Func_Table_Drugs()
 RETURNS Table
-AS 
-	RETURN (SELECT NameDrug, [Count], [DateMade], [DateUsed]
-		  FROM FactoryDrugs
-		  UNION
-		  SELECT NameDrug, [Count], [DateMade] , [DateUsed]
-		  FROM PharmacyDrugs)
+AS RETURN 
+(
+	SELECT NameDrug, [Count], [DateMade], [DateUsed]
+	FROM FactoryDrugs
+	UNION
+	SELECT NameDrug, [Count], [DateMade] , [DateUsed]
+	FROM PharmacyDrugs
+)
 
 
 DROP FUNCTION Func_Table_Drugs 
 
 SELECT * FROM Func_Table_Drugs()
 
+
+
+		--C
+
+CREATE FUNCTION Func_Table_Drugs2
+(
+	@minCount int
+)
+RETURNS @tableName Table (NameDrug nvarchar(50) Not Null, CountD int)
+AS 
+BEGIN
+	INSERT INTO @tableName SELECT NameDrug, [Count]
+	FROM (
+			SELECT NameDrug, [Count], [DateMade], [DateUsed]
+			FROM FactoryDrugs
+			UNION
+			SELECT NameDrug, [Count], [DateMade] , [DateUsed]
+			FROM PharmacyDrugs
+		  ) AS tabl
+	WHERE [Count] >= @minCount
+	RETURN
+END
+
+DROP FUNCTION Func_Table_Drugs2
+
+Select* from Func_Table_Drugs2('20')
