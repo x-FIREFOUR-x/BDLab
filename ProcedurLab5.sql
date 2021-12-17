@@ -5,6 +5,28 @@ USE DB_Pharmacy
 
 
 	--a
+CREATE TYPE tempTable1 AS TABLE(NameD nvarchar(50), CountD int, DateM date, DateU date);
+GO
+
+Create View PhDrugs AS Select* from PharmacyDrugs
+
+CREATE PROCEDURE procCreateTempTable
+	@table1 tempTable1 readonly
+AS
+	INSERT INTO PhDrugs (NameDrug, [Count], DateMade, DateUsed)
+	Select NameD, CountD, DateM, DateU
+	FROM @table1;
+
+DECLARE @t2 AS temptable1;
+insert into @t2
+	select NameDrug, [Count], DateMade, DateUsed
+	FROM FactoryDrugs;
+
+EXEC procCreateTempTable @t2;
+Select*  from @t2
+Select* FROM PhDrugs
+
+DROP PROCEDURE procCreateTempTable
 
 
 
