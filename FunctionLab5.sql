@@ -66,7 +66,7 @@ BEGIN
 			FROM PharmacyDrugs
 		  ) AS tabl
 	WHERE [Count] >= @minCount
-	RETURN
+	RETURN 
 END
 
 DROP FUNCTION Func_Table_Drugs2
