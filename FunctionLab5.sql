@@ -71,4 +71,4 @@ END
 
 DROP FUNCTION Func_Table_Drugs2
 
-Select* from Func_Table_Drugs2('20')
+Select* from Func_Table_Drugs2('30')

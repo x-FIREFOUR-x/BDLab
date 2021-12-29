@@ -150,3 +150,37 @@ PharmacyDrugs([NameDrug], [Count], [DateMade], [DateUsed])
 VALUES
 ('Киротіл','1000','20211112','20211128')
 
+
+						--Трігер для перевірки дати народження при вставлені запису в таблицю PrescriptionDoctor
+CREATE TRIGGER Chech_BirthDate_PrescriptionDoctor
+ON PrescriptionDoctor
+INSTEAD OF INSERT AS
+BEGIN
+	DECLARE @date date
+	SET @date = (SELECT [DateBirth] FROM inserted)
+
+	IF (@date > '1900-01-01')
+	BEGIN
+		INSERT INTO PrescriptionDoctor 
+		SELECT [NameDoctor],[SurnameDoctor], [NamePatient],[SurnamePatient],[DateBirth],[Diagnosis] 
+		FROM inserted
+	END
+	ELSE
+	BEGIN
+		PRINT('Помилка не коректна дата народження')
+	END
+END
+
+SELECT * FROM PrescriptionDoctor
+
+INSERT INTO 
+[dbo].[PrescriptionDoctor]([NameDoctor],[SurnameDoctor], [NamePatient],[SurnamePatient],[DateBirth],[Diagnosis])
+VALUES
+('Василь','Жук','Джек','Річер','20020206','Близькорукість')
+
+INSERT INTO 
+[dbo].[PrescriptionDoctor]([NameDoctor],[SurnameDoctor], [NamePatient],[SurnamePatient],[DateBirth],[Diagnosis])
+VALUES
+('Василь','Жук','Джек','Річер','18990206','Близькорукість')
+
+DROP TRIGGER Chech_BirthDate_PrescriptionDoctor

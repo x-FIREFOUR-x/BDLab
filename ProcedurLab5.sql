@@ -8,7 +8,37 @@ USE DB_Pharmacy
 CREATE TYPE tempTable1 AS TABLE(NameD nvarchar(50), CountD int, DateM date, DateU date);
 GO
 
+/*
+CREATE PROCEDURE MakeTempTable 
+	@table tempTable1 readonly 
+AS
+BEGIN
+  SELECT * INTO #temp_table FROM @table
+END
+
+
+DECLARE @table AS tempTable1
+INSERT INTO @table(NameD, CountD, DateM, DateU)
+SELECT *
+FROM PharmacyDrugs
+
+EXEC MakeTempTable @table
+
+SELECT * FROM #temp_table
+*/
+
+DECLARE @table AS tempTable1
+INSERT INTO @table(NameD, CountD, DateM, DateU)
+SELECT *
+FROM PharmacyDrugs
+
+SELECT * INTO #temp_table FROM @table
+
+SELECT * FROM #temp_table
+
+/*
 Create View PhDrugs AS Select* from PharmacyDrugs
+
 
 CREATE PROCEDURE procCreateTempTable
 	@table1 tempTable1 readonly
@@ -26,7 +56,7 @@ EXEC procCreateTempTable @t2;
 Select*  from @t2
 Select* FROM PhDrugs
 
-DROP PROCEDURE procCreateTempTable
+DROP PROCEDURE procCreateTempTable*/
 
 
 
