@@ -181,6 +181,6 @@ VALUES
 INSERT INTO 
 [dbo].[PrescriptionDoctor]([NameDoctor],[SurnameDoctor], [NamePatient],[SurnamePatient],[DateBirth],[Diagnosis])
 VALUES
-('Василь','Жук','Джек','Річер','18990206','Близькорукість')
+('Василь','Жук','Джек','Рі','18990206','Близькорукість')
 
 DROP TRIGGER Chech_BirthDate_PrescriptionDoctor
